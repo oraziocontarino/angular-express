@@ -1,0 +1,138 @@
+$dayBaseWidth: 14%;
+$dayBaseHeight: 25px;
+$cloud: #9FC5E8;
+$base: 5px;
+$concrete: 5px;
+$background: none;
+$seafoam: #9FC5E8;
+$white: #fff;
+$teal: #9FC5E8;
+$light-blue-grey: #9FC5E8;
+
+.calendar-nav-month{
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.calendar-nav-icon{
+  border: solid 2px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.showEvent{
+  background-color: #9FC5E8;
+  border-radius: 25px;
+}
+.calendario{
+  padding: 25px;
+  width: 100%;
+}
+.calendar {
+  display: block;
+  width: $dayBaseWidth * 7;
+  margin: 0 auto;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .calendar-navs {
+    background-color: $cloud;
+  }
+
+  .month-nav {
+    padding: $base;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .year-nav {
+    padding: $base;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-family: 'Montserrat';
+  }
+
+  .month-grid {
+    .day-names {
+      display: flex;
+      flex-direction: row;
+      background: $concrete;
+      border-bottom-right-radius: 3px;
+      border-bottom-left-radius: 3px;
+    }
+    .weeks {
+      display: flex;
+      flex-direction: column;
+    }
+    .week {
+      display: flex;
+      flex-direction: row;
+    }
+    .week-date,
+    .day-name {
+      text-align: center;
+      padding: $base;
+      display: block;
+      width: $dayBaseWidth;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .week-date {
+      height: $dayBaseHeight;
+      position: relative;
+
+      .date-text {
+        z-index: 10;
+        font-size: 10px;
+        font-family: 'Montserrat', sans-serif;
+      }
+
+      &::after {
+        content: '';
+        height: $dayBaseHeight * 0.9;
+        width: $dayBaseWidth * 0.9;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 5%;
+        transition: background-color 150ms linear, color 150ms linear;
+        z-index: 1;
+      }
+
+      &.enabled {
+        cursor: pointer;
+        &:hover {
+          &:after {
+            background-color: $seafoam;
+          }
+        }
+      }
+      &.selected {
+        color: $white;
+        &:after {
+          background-color: $teal;
+        }
+        &:hover {
+          &:after {
+            background-color: $teal;
+          }
+        }
+      }
+
+      &.disabled {
+        color: $light-blue-grey;
+      }
+    }
+
+    .today {
+      font-weight: bold;
+    }
+  }
+} 

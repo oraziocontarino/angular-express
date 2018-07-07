@@ -1,0 +1,138 @@
+<div [hidden]="isReady" class="loader"></div>
+<div class="row" [hidden]="!isReady" *ngIf="datiDipendente && datiDipendente.length > 0">
+  <div class="col-md-6">
+    <div>
+      <div class="card" style="width: 30rem; margin-top: 5rem;">
+          <div class="card-header">
+              <h5 class="card-title">{{datiDipendente[0].dipendente.nome}} {{datiDipendente[0].dipendente.cognome}}</h5>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-4">
+                <label style=" font-weight: bold;">Data di Nascita</label>
+              </div>
+              <div class="col-md-8">
+                  {{datiDipendente[0].dipendente.data_nascita | date}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <label style=" font-weight: bold;">Email</label>
+              </div>
+              <div class="col-md-8">
+                  {{datiDipendente[0].dipendente.email}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <label style=" font-weight: bold;">Ruolo</label>
+              </div>
+              <div class="col-md-8">
+                  {{datiDipendente[0].dipendente.ruolo | uppercase}}
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card" style="width: 30rem; margin-top: 5rem;">
+      <div class="card-header">
+          <h5 class="card-title">Skills</h5>
+      </div>
+      <div class="card-body">
+          <table class="table table-bordered">
+              <thead>
+                  <tr>
+                      <th>Nome Skill</th>
+                      <th>Seniority</th>
+                      <th>Azioni</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let skill of datiDipendente">
+                      <td>
+                          {{skill.skill[0].nome}}
+                      </td>
+                      <td>
+                          <select class="input-text" [(ngModel)] ="skill.seniority" (change)="skill.changed=true" name="{{skill.skill[0].id_skill}}">
+                              <option value="Junior">Junior</option>
+                              <option value="Senior">Senior</option>
+                          </select>
+                      </td>
+                      <td>
+                          <a *ngIf="!skill.changed" class="disabled" >
+                              <i class="material-icons md-dark md-inactive"  title="Effettua delle modifiche per abilitare l'azione">save</i> 
+                          </a>
+                          <a *ngIf="skill.changed" (click)="modifica(skill)" class="valid-action" >
+                              <i class="material-icons md-blue" title="Salva Modfiche">save</i> 
+                          </a>
+
+                          <a (click)="rimuovi(skill)" class="valid-action" >
+                              <i class="material-icons md-red" title="Rimuovi Skill">delete</i> 
+                          </a>
+                      </td>
+                  </tr>
+              </tbody>       
+          </table>
+          <div *ngIf="allSkill && allSkill.length > 0">
+              <h5 class="card-title">Aggiungi Skill</h5>
+              <div class="row">
+                  <div class="col-sm-2"><label>Nome: </label></div>
+                  <div class="col-sm-4">
+                      <select class="input-text" [(ngModel)] ="newSkill.id" value="newSkill.id" name="{newSkill.id}">
+                          <option *ngFor="let skillAvaible of allSkill" [value]="skillAvaible.id_skill">{{skillAvaible.nome}}</option>
+                      </select>
+                  </div>
+                  <div class="col-sm-2"><label>Seniority: </label></div>
+                  <div class="col-sm-4">
+                      <select class="input-text" [(ngModel)] ="newSkill.seniority" name="{newSkill.seniority}">
+                          <option value="Junior">Junior</option>
+                          <option value="Senior">Senior</option>
+                      </select>
+                  </div>
+              </div>
+              <button  class="ladda-button blue" data-size="s" [disabled]="!newSkill.seniority || !newSkill.id" [ladda]="isLoading" (click)="aggiungi()">Aggiungi</button>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" [hidden]="!isReady" *ngIf="!datiDipendente || datiDipendente.length < 1">
+    <div class="col-md-6">
+        <div style="padding-top:2rem;">
+            <i class="material-icons" style="padding-left:42%; font-size: 10rem;">error_outline</i>
+            <p style="font-size: 2rem; text-align:center;">
+            <strong>Questo utente non ha skill</strong>
+            </p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card" style="width: 30rem; margin-top: 5rem;">
+            <div class="card-header">
+                <h5 class="card-title">Aggiungi Skill</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-2"><label>Nome: </label></div>
+                    <div class="col-sm-4">
+                        <select class="input-text" [(ngModel)] ="newSkill.id" value="newSkill.id" name="{newSkill.id}">
+                            <option *ngFor="let skillAvaible of allSkill" [value]="skillAvaible.id_skill">{{skillAvaible.nome}}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2"><label>Seniority: </label></div>
+                    <div class="col-sm-4">
+                        <select class="input-text" [(ngModel)] ="newSkill.seniority" name="{newSkill.seniority}">
+                            <option value="Junior">Junior</option>
+                            <option value="Senior">Senior</option>
+                        </select>
+                    </div>
+                </div>
+                <button  class="ladda-button blue" data-size="s" [disabled]="!newSkill.seniority || !newSkill.id" [ladda]="isLoading" (click)="aggiungi()">Aggiungi</button>
+            </div>
+        </div>
+    </div>
+</div>
+

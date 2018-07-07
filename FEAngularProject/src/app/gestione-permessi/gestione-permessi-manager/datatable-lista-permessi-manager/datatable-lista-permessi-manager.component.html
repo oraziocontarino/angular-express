@@ -1,0 +1,22 @@
+
+<div class="listaPermessiManager">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Elenco dei permessi richiesti dai subordinati</h5>
+      </div>
+      <div class="card-body">
+        <table [ngClass]="tableReady ? '' : 'not-visible'" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover datatable-permessi-manager">
+          <thead>
+            <tr>
+              <th *ngFor="let header of headers">{{header}}</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="loader" [ngClass]="tableReady ? 'hidden' : ''">&nbsp;</div>
+    </div>
+  </div>
+  
+  
+  

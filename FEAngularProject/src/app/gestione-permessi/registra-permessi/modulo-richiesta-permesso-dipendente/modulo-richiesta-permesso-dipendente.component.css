@@ -1,0 +1,53 @@
+.input-date{
+    width: 25%;
+    height: 25px;
+    margin: 0 auto;
+    border: none;
+    border: solid 1px #ccc;
+}
+
+.input-date.input-date-left{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 0px;
+}
+
+.input-date.input-date-middle{
+    border-radius: 0px;
+}
+
+.input-date.input-date-right{
+    border-top-left-radius: 0px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 10px;
+}
+
+.fileName{
+    margin-bottom: 0.5rem;
+}
+.card-body .row{
+    margin-right: 0px;
+}
+
+::-webkit-input-placeholder {
+    text-align: center;
+ }
+ 
+ :-moz-placeholder { /* Firefox 18- */
+    text-align: center;  
+ }
+ 
+ ::-moz-placeholder {  /* Firefox 19+ */
+    text-align: center;  
+ }
+ 
+ :-ms-input-placeholder {  
+    text-align: center; 
+ }
+
+ .moduloRichiestaPermesso{
+    padding: 25px;
+    width: 100%;
+ }

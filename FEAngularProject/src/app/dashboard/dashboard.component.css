@@ -1,0 +1,12 @@
+.loader{
+    width: 406px;
+    height: 406px;
+    background-image: url('https://media.giphy.com/media/mIaROTyFzeJQk/giphy.gif');
+    background-repeat: no-repeat;
+    margin-left: calc(50% - 203px);
+    margin-top: calc(25% - 203px);
+    
+}
+h1, p{
+    text-align: center;
+}

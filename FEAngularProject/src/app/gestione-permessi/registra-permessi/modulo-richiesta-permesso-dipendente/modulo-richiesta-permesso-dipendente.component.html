@@ -1,0 +1,49 @@
+<form #userlogin = "ngForm" (ngSubmit) = "registraPermesso()" class="moduloRichiestaPermesso">
+  <div class="card">
+    <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="col-md-12"><label>Data Inizio</label></div>
+              <div class="col-md-12">
+                <ngb-datepicker [(ngModel)]="dataInizio" name="dataInizio"></ngb-datepicker>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="col-md-12"><label>Data Fine</label></div>
+              <div class="col-md-12">
+                <ngb-datepicker [(ngModel)]="dataFine" name="dataFine"></ngb-datepicker>
+              </div>
+            </div>
+          </div>
+          <div class="row">&nbsp;</div>
+          <label>Note</label>
+          <div class="row">
+            <div class="col-md-12">
+              <input type="text" name="note" class="input-text" placeholder="note" [(ngModel)]="note">
+            </div>
+          </div>
+          <label>Tipologia</label>
+          <div class="row">
+            <div class="col-md-12">
+              <select name="tipologia" class="input-text" [(ngModel)]="tipologia">
+                  <option *ngFor="let nomePermesso of permessiEnumArray" value="{{nomePermesso}}">{{ nomePermesso }}</option>
+              </select>
+            </div>
+          </div>
+          <label>Carica certificato</label>
+          <div class="row">
+            <label class="col-md-3 input-group-btn">
+              <span class="btn btn-primary">
+                <i class="material-icons">attach_file</i>
+                <input type="file" name="certificato" style="display: none;" (change)="setFileName($event)" ngModel>
+              </span>
+            </label>
+            <input class="col-md-9 fileName form-control" type="text" name="nomeCertificatoCaricato" readonly [(ngModel)]="nomeCertificatoCaricato">
+          </div>
+
+        <div class="row" style="padding-top:1rem; padding-left:1rem;">
+          <input type="submit" class="col-md-12 btn btn-primary" value="Inoltra richiesta">
+        </div>
+    </div>
+  </div>
+</form>

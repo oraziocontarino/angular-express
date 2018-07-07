@@ -1,0 +1,61 @@
+<!-- Calendario per la visualizzazione dei giorni di permesso approvati -->
+<div class="calendario">
+  <div class="card">
+    <div class="card-header">
+      <div class="row text-center">
+        <!-- Header per il cambio mese / cambio anno -->
+        <div class="col-md-2 col-sm-2">
+          <a (click)="prevMonth()"><i class="material-icons hand calendar-nav-icon" title="before">navigate_before</i></a> 
+        </div>
+        <div class="col-md-8 col-sm-8">
+          <span class="calendar-nav-month"><strong>{{ currentDate.format('MMMM') | uppercase }}</strong></span>
+        </div>
+        <div class="col-md-2 col-sm-2">
+          <a (click)="nextMonth()"><i class="material-icons hand calendar-nav-icon" title="next">navigate_next</i></a>
+        </div>
+      </div>
+      <div class="row text-center">
+        <div class="col-md-2 col-sm-2">
+          <a (click)="prevYear()"><i class="material-icons hand calendar-nav-icon" title="before">navigate_before</i></a> 
+        </div>
+        <div class="col-md-8 col-sm-8">
+          <span class="calendar-nav-month"><strong>{{ currentDate.format('YYYY') }}</strong></span>
+        </div>
+        <div class="col-md-2 col-sm-2">
+          <a (click)="nextYear()"><i class="material-icons hand calendar-nav-icon" title="next">navigate_next</i></a>
+        </div>
+      </div>
+        
+    </div>
+    <div class="card-body">
+      <div class="calendar">
+        <div class="month-grid">
+          <div class="day-names">
+            <div *ngFor="let name of dayNames" class="day-name p9">
+              {{ name }}
+            </div>
+          </div>
+          <div class="weeks">
+            <div *ngFor="let week of weeks" class="week">
+              <ng-container *ngFor="let day of week">
+                <div class="week-date disabled" *ngIf="!isSelectedMonth(day.mDate)">
+                  <span class="date-text">{{ day.mDate.date() }}</span>
+                </div>
+                <!-- I giorni approvati vengono marcati come "selezionati" in modo tale da essere evidenziati, per mezzo della condizione isSelectedMonth(day.mDate) -->
+                <div class="week-date enabled"
+                      *ngIf="isSelectedMonth(day.mDate)"
+                      (click)="selectDate(day)"
+                      [ngClass]="{ today: day.today, selected: day.selected, showEvent: day.showEvent }">
+                  <span class="date-text">
+                    {{ day.mDate.date() }}
+                    <i *ngIf="">*</i>
+                  </span>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+  </div>
+</div>

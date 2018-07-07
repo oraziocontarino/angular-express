@@ -1,0 +1,24 @@
+<div class="card-header col-md-12">
+    <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+            <a class="nav-link active tab-header" tab-name="i-tuoi-permessi" (click)="openTab('i-tuoi-permessi')">I tuoi permessi</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link tab-header" tab-name="permessi-suburdinati" (click)="openTab('permessi-suburdinati')">Permessi dei subordinati</a>
+        </li>
+    </ul>
+</div>
+<div class="card-body">
+    <div class="i-tuoi-permessi tab-body" tab-name="i-tuoi-permessi">
+        <app-gestione-permessi-dipendenti class="row"></app-gestione-permessi-dipendenti>
+    </div>
+    <div class="permessi-subordinati tab-body row hidden" tab-name="permessi-suburdinati">
+        <div class="col-md-6">
+            <app-datatable-lista-permessi-manager></app-datatable-lista-permessi-manager>
+        </div>
+        <div class="col-md-6">
+            <app-calendario-permessi-dipendente [loadManager]=true></app-calendario-permessi-dipendente>
+        </div>
+    </div>
+</div>
+

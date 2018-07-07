@@ -1,0 +1,12 @@
+<div *ngIf = "employerLogService.isLogged()">
+    <div *ngIf = "employerLogService.isManager()">
+        <h1>Dashboard manager</h1>
+        <p>Tramite questo pannello puoi gestire le informazioni ed i permessi dei dipendenti</p>
+    </div>
+    <div *ngIf = "!employerLogService.isManager()">
+        <h1>Dashboard utente</h1>
+        <p>Tramite questo pannello puoi gestire le tue informazioni ed i tuoi permessi</p>
+    </div>
+</div>
+
+<div  *ngIf = "!employerLogService.isLogged()" class="loader"></div>

@@ -1,0 +1,15 @@
+.name{
+    margin: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.button-logout{
+    border:none;
+    background: none;
+    padding-top: 0.5rem;
+}
+
+ul a i{
+    display: inline-flex;
+    vertical-align: middle;
+}

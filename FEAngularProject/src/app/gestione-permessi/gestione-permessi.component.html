@@ -1,0 +1,18 @@
+<!-- Tab Gestione permessi-->
+<div *ngIf = "employerLogService.isLogged()">
+    <div *ngIf="employerLogService.isManager()">
+        <!--
+            Caso utente loggato = manager
+            Mostro il componet per la gestione dei permessi dell'utente e dei suoi subordinati
+        -->
+        <app-gestione-permessi-manager class="row"></app-gestione-permessi-manager>
+    </div>
+    <div *ngIf="!employerLogService.isManager()">
+        <!--
+            Caso utente loggato = dipendente
+            Mostro il componet per la gestione dei permessi dell'utente
+        -->
+        <app-gestione-permessi-dipendenti class="row"></app-gestione-permessi-dipendenti>
+    </div>
+</div>
+

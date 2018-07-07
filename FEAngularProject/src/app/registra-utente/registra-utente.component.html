@@ -1,0 +1,41 @@
+<div *ngIf = "employerLogService.isLogged()">
+    <div *ngIf = "!employerLogService.isManager()">
+        <div class="row">
+            <i class="material-icons" style="margin:auto; font-size: 17rem;">error_outline</i>
+        </div>
+        <div class="row">
+            <p style="margin:auto; font-size: 2rem;">
+            <strong>Solo i manager possono registrare!</strong>
+            </p>
+        </div>
+    </div>
+    <div *ngIf="employerLogService.isManager()">
+        <form #creaUtente = "ngForm">
+            <div class="card" style="width: 30rem; margin-top: 5rem;">
+                <div class="card-body">
+                    <label>Nome</label>
+                    <input type="text" class="input-text" name="nome" [(ngModel)]="nome" required (blur)="checkRequired()">
+                    <label>Cognome</label>
+                    <input type="text" class="input-text" name="cognome" [(ngModel)]="cognome" required (blur)="checkRequired()">
+                    <label>Codice Fiscale</label>
+                    <input (ngModelChange)="error=undefined" type="text" class="input-text" name="codiceFiscale" [(ngModel)]="codiceFiscale" required (blur)="checkRequired()">
+                    <label>Data di Nascita</label>
+                    <input type="date" class="input-text" name="dataDiNascita" [(ngModel)]="dataDiNascita" required (blur)="checkRequired()">
+                    <label>Ruolo</label>
+                    <select class="input-text" name="ruolo" [(ngModel)]="ruolo" required>
+                        <option value="manager">Manager</option>
+                        <option value="dipendente">Dipendente</option>
+                    </select>
+                    <label>Email</label>
+                    <input type="email" class="input-text" name="email" [(ngModel)]="email" required (blur)="checkRequired()">
+                    <label>Password</label>
+                    <input type="password" class="input-text" name="password" [(ngModel)]="password" required (blur)="checkRequired()">
+                    <div class="row" style="padding-top:1rem; padding-left:1rem;">
+                        <button [disabled]="isDisabled()" class="ladda-button blue" data-size="s" [ladda]="isLoading" (click) = "registraDipendente()">Registra Utente</button>
+                        <label class="error" *ngIf="error">{{error}}</label>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

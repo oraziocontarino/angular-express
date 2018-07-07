@@ -1,0 +1,88 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;" *ngIf = "employerLogService.isLogged()">
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <div ngbDropdown>
+          <a class="nav-link valid-action name" ngbDropdownToggle>
+            <i class="material-icons">face</i>
+            {{employerLogService.getNomeUtente()}} {{employerLogService.getCognomeUtente()}}
+          </a>
+          <div ngbDropdownMenu>
+            <a class="dropdown-item nav-link valid-action" routerLink="/visualizzaProfilo">
+              <i class="material-icons" title="Info">perm_identity</i>
+              Profilo utente
+            </a>
+            <a class="dropdown-item nav-link valid-action" (click)="logout()">
+              <i class="material-icons" title="Logout">power_settings_new</i>
+              Esci
+            </a>
+          </div>
+        </div>
+    </li>
+  </ul>
+  <div class="collapse navbar-collapse" id="navbarColor03">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" *ngIf="employerLogService.isManager()">
+          <div ngbDropdown>
+            <a class="nav-link valid-action" id="dropdownConfig" ngbDropdownToggle>
+                <i class="material-icons" title="Registra">add</i> 
+                Registra
+            </a>
+            <div ngbDropdownMenu aria-labelledby="dropdownConfig">
+              <a class="dropdown-item" routerLink="/registraUtente">
+                <i class="material-icons" title="Registra utente">person_add</i>
+                Utente
+              </a>
+              <a class="dropdown-item" routerLink="/registraTeam">
+                <i class="material-icons" title="Registra team">group_add</i>
+                Team
+              </a>
+            </div>
+          </div>
+      </li>
+<!--    <li class="nav-item">
+          <div ngbDropdown>
+            <a class="nav-link" id="dropdownConfig" ngbDropdownToggle>
+                <i class="material-icons" title="Gestione dipendenti">dashboard</i>
+                Gestione dipendenti
+              </a>
+            <div ngbDropdownMenu aria-labelledby="dropdownConfig">
+              <a class="dropdown-item" routerLink="/visualizzaSkills">
+                <i class="material-icons" title="Visualizza skills">assignment_ind</i>
+                Visualizza Skills
+              </a>
+              <a class="dropdown-item" routerLink="/visualizzaTeam">
+                <i class="material-icons" title="Visualizza team">supervisor_account</i>
+                Visualizza Team
+              </a>
+            </div>
+          </div>
+      </li> -->
+      
+              <!-- <a class="dropdown-item" routerLink="/registraPermessi">Permessi</a> -->
+      <li class="nav-item">
+        <div ngbDropdown>
+          <a class="nav-link valid-action" id="dropdownConfig" ngbDropdownToggle>
+              <i class="material-icons" title="Gestione permessi">event_note</i> 
+              Gestione permessi
+          </a>
+          <div ngbDropdownMenu aria-labelledby="dropdownConfig">
+            <a class="dropdown-item" routerLink="/registraPermessi">
+              <i class="material-icons" title="Richiedi permesso">event_available</i>
+              Richiedi un permesso
+            </a>
+            <a class="dropdown-item" routerLink="/gestionePermessiDipendente">
+              <i class="material-icons" title="Riepilogo permesso">folder_open</i>
+              Riepilogo permessi
+            </a>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+    <form class="form-inline">
+      <button class="btn btn-info" (click)="search()"><i class="material-icons">search</i></button>
+    </form>
+  </div>
+</nav>
+<router-outlet></router-outlet>
+

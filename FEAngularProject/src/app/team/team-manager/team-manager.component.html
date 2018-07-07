@@ -1,0 +1,70 @@
+<div [hidden]="isReady" class="loader"></div>
+<div class="row" [hidden]="!isReady" *ngIf="datiTeam && datiTeam.length>0">
+  <div class="col-md-6">
+    <div>
+      <div class="card" style="width: 30rem; margin-top: 5rem;">
+          <div class="card-header">
+              <h5 class="card-title">{{datiTeam[0].nome}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Responsabile: {{datiTeam[0].team_capo_team[0].nome}} {{datiTeam[0].team_capo_team[0].cognome}}</h6>
+          </div>
+          <div class="card-body">
+              <table class="table" *ngIf="datiTeam[0].team_dipendente.length>0">
+                <thead>
+                  <tr>
+                    <th>Dipendente</th>
+                    <th *ngFor="let skill of allSkill">{{skill.nome}}</th>
+                    <th *ngIf="employerLogService.isManager() && employerLogService.getId() == datiTeam[0].team_capo_team[0].id_dipendente">Rimuovi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dipendente of datiTeam[0].team_dipendente">
+                    <td class="valid-action" routerLink="/skillDipendente/{{dipendente.dipendente.id_dipendente}}">{{dipendente.dipendente.nome}} {{dipendente.dipendente.cognome}}</td>
+                      <td *ngFor="let skill of allSkill">
+                        <span *ngFor="let skillDipendente of dipendente.dipendente.skill;  let i=index">
+                        <label *ngIf="compareSkill(skillDipendente.skill[0].nome, skill.nome)" 
+                        >{{dipendente.dipendente.skill[i].seniority}}</label></span>
+                      </td>
+                      <td *ngIf="employerLogService.isManager() && employerLogService.getId() == datiTeam[0].team_capo_team[0].id_dipendente">
+                        <a (click)="rimuovi(dipendente.id_team, dipendente.dipendente.id_dipendente)" class="valid-action" >
+                          <i class="material-icons md-red" title="Rimuovi Skill">delete</i> 
+                        </a>
+                      </td>
+                  </tr>
+                </tbody>
+            </table>
+            <div *ngIf="datiTeam[0].team_dipendente.length<1" style="padding-top:2rem;">
+                <i class="material-icons" style="padding-left:32%; font-size: 10rem;">error_outline</i>
+                <p style="font-size: 2rem; text-align:center;">
+                  <strong>Questo Team non ha membri</strong>
+                </p>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6" *ngIf="employerLogService.isManager() && employerLogService.getId() == datiTeam[0].team_capo_team[0].id_dipendente">
+    <div class="card" style="width: 30rem; margin-top: 5rem;">
+      <div class="card-header">
+          <h5 class="card-title">Aggiungi membri al team</h5>
+      </div>
+      <div class="card-body">
+          <div class="row" *ngIf="allDipendenti && allDipendenti.length>0">
+              <div class="col-sm-4"><label>Dipendente: </label></div>
+              <div class="col-sm-8">
+                  <select class="input-text" [(ngModel)] ="newDipendente.id" value="newDipendente.id" name="{newDipendente.id}">
+                      <option *ngFor="let dipendenteAvaible of allDipendenti" [value]="dipendenteAvaible.id_dipendente">{{dipendenteAvaible.nome}} {{dipendenteAvaible.cognome}}</option>
+                  </select>
+              </div>
+          </div>
+          <button  class="ladda-button blue" data-size="s" [disabled]="!newDipendente.id" [ladda]="isLoading"*ngIf="allDipendenti && allDipendenti.length>0" (click)="aggiungi()">Aggiungi</button>
+          <div class="row" *ngIf="allDipendenti && allDipendenti.length<1">
+              <i class="material-icons" style="padding-left:32%; font-size: 10rem;">error_outline</i>
+              <p style="font-size: 2rem; text-align:center;">
+                <strong>Questo Team ha tutti i membri!</strong>
+              </p>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

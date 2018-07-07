@@ -1,0 +1,14 @@
+<form #userlogin = "ngForm">
+  <div class="card" style="width: 18rem; margin-top: 10rem;">
+    <div class="card-body">
+        <label>Codice Fiscale</label>
+        <input type="text" name="codiceFiscale" class="input-text" [(ngModel)]="codiceFiscale">
+        <label>Password</label>
+        <input type="password" name="password" class="input-text" [(ngModel)]="password">
+        <div class="row" style="padding-top:1rem; padding-left:1rem;">
+          <button class="ladda-button blue" data-size="s" [disabled]="!codiceFiscale || !password" [ladda]="isLoading" (click)="login()">Login</button>
+          <label class="error" *ngIf="error">{{error}}</label>
+        </div>
+    </div>
+  </div>
+</form>

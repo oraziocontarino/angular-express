@@ -1,0 +1,21 @@
+<!-- Questo component implementa una datatable, l-elemento tableReady permette di abilitare un loader ogniqualvolta il suo contenuto subisce variazioni-->
+<div class="listaPermessiDipendente">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-title">I tuoi permessi</h5>
+    </div>
+    <div class="card-body">
+      <table [ngClass]="tableReady ? '' : 'not-visible'" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover datatable-permessi-dipendente">
+        <thead>
+          <tr>
+            <th *ngFor="let header of headers">{{header}}</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="loader" [ngClass]="tableReady ? 'hidden' : ''">&nbsp;</div>
+  </div>
+</div>
+
+

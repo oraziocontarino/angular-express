@@ -1,0 +1,30 @@
+<div *ngIf = "employerLogService.isLogged()">
+    <div *ngIf = "!employerLogService.isManager()">
+        <div class="row">
+            <i class="material-icons" style="margin:auto; font-size: 17rem;">error_outline</i>
+        </div>
+        <div class="row">
+            <p style="margin:auto; font-size: 2rem;">
+            <strong>Solo i manager possono registrare!</strong>
+            </p>
+        </div>
+    </div>
+    <div *ngIf="employerLogService.isManager()">
+        <form #creaTeam = "ngForm">
+            <div class="card" style="width: 30rem; margin-top: 5rem;">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <label>Nome team</label>
+                            <input type="text" class="input-text" (click)="error=undefined" name="nomeTeam" [(ngModel)]="nomeTeam">
+                            <div class="row" style="padding-top:1rem; padding-left:1rem;">
+                                <button [disabled]="!nomeTeam" class="ladda-button blue" data-size="s" [ladda]="isLoading" (click) = "registraTeam()">Crea</button>
+                                <label class="error" *ngIf="error">{{error}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

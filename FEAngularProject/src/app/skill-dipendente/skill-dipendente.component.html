@@ -1,0 +1,4 @@
+<div *ngIf = "employerLogService.isLogged()">
+    <app-skill-dipendente-dipendenti *ngIf="!employerLogService.isManager()"></app-skill-dipendente-dipendenti>
+    <app-skill-dipendente-manager *ngIf="employerLogService.isManager()"></app-skill-dipendente-manager>
+</div>
